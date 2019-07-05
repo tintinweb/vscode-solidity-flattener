@@ -1,0 +1,64 @@
+{
+    "name": "vscode-solidity-flattener",
+    "displayName": "Solidity Contract Flattener",
+    "description": "git in",
+    "version": "0.0.2",
+    "keywords": [
+        "solidity",
+        "ethereum",
+        "flatten",
+        "truffle",
+        "truffle-flattener"
+    ],
+    "publisher": "tintinweb",
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.20.2"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "bugs": {
+        "url": "https://github.com/tintinweb/vscode-solidity-flattener/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tintinweb/vscode-solidity-flattener"
+    },
+    "main": "./src/extension.js",
+    "activationEvents": [
+        "onCommand:truffle-flattener.contextMenu.flatten",
+        "onCommand:truffle-flattener.activeFile.flatten"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "truffle-flattener.activeFile.flatten",
+                "title": "flatten current file",
+                "category": "Solidity Flattener"
+            },
+            {
+                "command": "truffle-flattener.contextMenu.flatten",
+                "title": "Solidity: flatten selected file(s)",
+                "category": "Solidity Flattener"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Solidity Truffle Flattener",
+            "properties": {}
+        },
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "truffle-flattener.contextMenu.flatten",
+                    "when": "resourceLangId == solidity && resourceFilename =~ /\\.sol/"
+                }
+            ]
+        }
+    },
+    "dependencies": {
+        "find-up": "^4.1.0",
+        "truffle-flattener": "^1.4.0"
+    }
+}
