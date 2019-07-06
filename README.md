@@ -17,11 +17,11 @@ Adds a context menu to flatten files to the vscode file explorer:
 
 ```js
 
-vscode.commands.executeCommand("tintinweb.vscode-solidity-flattener.flatten", {files: files, callback:callback, showErrors:showErrors})
-    .catch(error =>{
-        // command not available
-        vscode.window.showWarningMessage("Error running `tintinweb.vscode-solidity-flattener`. Please make sure the extension is installed.\n" + error)
-    })
+ vscode.commands.executeCommand("vscode-solidity-flattener.flatten", {files: files, callback:callback, showErrors:showErrors})
+        .catch(error =>{
+            // command not available
+            vscode.window.showWarningMessage("Error running `tintinweb.vscode-solidity-flattener`. Please make sure the extension is installed.\n" + error)
+        })
 ```
 
 
