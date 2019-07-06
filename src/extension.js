@@ -14,7 +14,7 @@ const findUp = require("find-up")
 
 /** global vars */
 const LANGID = 'solidity'
-const EXTENSION_PREFIX = 'truffle-flattener'
+const EXTENSION_PREFIX = 'vscode-solidity-flattener'
 
 //const config = vscode.workspace.getConfiguration(EXTENSION_PREFIX);
 
@@ -82,20 +82,26 @@ function onActivate(context) {
     )
 
     context.subscriptions.push(
-        vscode.commands.registerCommand(EXTENSION_PREFIX + '.flatten', async (files, callback, showErrors) => {
-            showErrors = showErrors === undefined ? true : showErrors  // default show errors
+        vscode.commands.registerCommand(EXTENSION_PREFIX + '.flatten', async (args) => {
+            // take document or string; default active editor if
+            args = args || {}
+            let options = {
+                files: args.files,
+                showErrors: args.showErrors === undefined ? true : showErrors,
+                callback: args.callback || function(file, tpath, res){ newWindowBeside(res)}
+            }
 
-            files.map(x => x.path).filter(x => x.endsWith(".sol")).forEach(x => {
+            options.files.map(x => x.path).filter(x => x.endsWith(".sol")).forEach(x => {
                 findUp(["truffle.js", "truffle-config.js"],{"cwd":path.dirname(x)}).then(tpath => {
                     if(!isSubpath(vscode.workspace.rootPath, tpath)){
-                        showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + "The contract does not appear to be part of a truffle project.")
+                        options.showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + "The contract does not appear to be part of a truffle project.")
                         return;
                     }
 
-                    truffleFlattener([x], path.dirname(tpath)).then(res => cb(x, tpath, res)).then( () => {
-                        showErrors && vscode.window.showInformationMessage('[Flatten success] ' + x)
+                    truffleFlattener([x], path.dirname(tpath)).then(res => options.callback(x, tpath, res)).then( () => {
+                        options.showErrors && vscode.window.showInformationMessage('[Flatten success] ' + x)
                     }).catch(ex => {
-                        showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + ex.message + "\n\n" + "NOTE: Please make sure to run `npm install` in the truffle project dir.")
+                        options.showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + ex.message + "\n\n" + "NOTE: Please make sure to run `npm install` in the truffle project dir.")
                         console.error(ex)
                     })
                 })

@@ -2,7 +2,7 @@
     "name": "vscode-solidity-flattener",
     "displayName": "Solidity Contract Flattener",
     "description": "git in",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "keywords": [
         "solidity",
         "ethereum",
@@ -27,23 +27,23 @@
     },
     "main": "./src/extension.js",
     "activationEvents": [
-        "onCommand:truffle-flattener.contextMenu.flatten",
-        "onCommand:truffle-flattener.activeFile.flatten"
+        "onCommand:vscode-solidity-flattener.contextMenu.flatten",
+        "onCommand:vscode-solidity-flattener.activeFile.flatten"
     ],
     "contributes": {
         "commands": [
             {
-                "command": "truffle-flattener.activeFile.flatten",
+                "command": "vscode-solidity-flattener.activeFile.flatten",
                 "title": "flatten current file",
                 "category": "Solidity Flattener"
             },
             {
-                "command": "truffle-flattener.contextMenu.flatten",
+                "command": "vscode-solidity-flattener.contextMenu.flatten",
                 "title": "Solidity: flatten selected file(s)",
                 "category": "Solidity Flattener"
             },
             {
-                "command": "truffle-flattener.flatten",
+                "command": "vscode-solidity-flattener.flatten",
                 "title": "flatten files with callback",
                 "category": "Solidity Flattener"
             }
@@ -57,7 +57,7 @@
             "explorer/context": [
                 {
                     "group": "solidity",
-                    "command": "truffle-flattener.contextMenu.flatten",
+                    "command": "vscode-solidity-flattener.contextMenu.flatten",
                     "when": "resourceLangId == solidity && resourceFilename =~ /\\.sol/"
                 }
             ]

@@ -9,9 +9,22 @@ Adds a context menu to flatten files to the vscode file explorer:
 
 ### Developers
 
-`truffle-flattener.contextMenu.flatten` can be called by any other extension providing the following arguments: 
-* `clickedFile` - leave empty
-* `selectedFiles` - list of files to flatten. will create one new text-editor panel per flattened file.
+`truffle-flattener.contextMenu.flatten` can be called by any other extension as following:
+
+* `files` .. an array of files to flatten
+* `callback` .. function to be called as `callback(string:filepath, string:truffle-path, string:flattened_contract)` on flatten success
+* `showErrors` .. enable or suppress vscode info/error notifications
+
+```js
+
+vscode.commands.executeCommand("tintinweb.vscode-solidity-flattener.flatten", {files: files, callback:callback, showErrors:showErrors})
+    .catch(error =>{
+        // command not available
+        vscode.window.showWarningMessage("Error running `tintinweb.vscode-solidity-flattener`. Please make sure the extension is installed.\n" + error)
+    })
+```
+
+
 
 Let me know if you need any other interfaces.
 
