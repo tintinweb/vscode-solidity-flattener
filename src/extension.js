@@ -7,15 +7,16 @@
 
 /** imports */
 const vscode = require("vscode")
+const path = require('path');
+
 const truffleFlattener = require("truffle-flattener")
 const findUp = require("find-up")
-var path = require('path');
 
 /** global vars */
 const LANGID = 'solidity'
 const EXTENSION_PREFIX = 'truffle-flattener'
 
-const config = vscode.workspace.getConfiguration(EXTENSION_PREFIX);
+//const config = vscode.workspace.getConfiguration(EXTENSION_PREFIX);
 
 /** classdecs */
 
@@ -72,6 +73,29 @@ function onActivate(context) {
                         vscode.window.showInformationMessage('[Flatten success] ' + x)
                     }).catch(ex => {
                         vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + ex.message + "\n\n" + "NOTE: Please make sure to run `npm install` in the truffle project dir.")
+                        console.error(ex)
+                    })
+                })
+            })
+
+        })
+    )
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand(EXTENSION_PREFIX + '.flatten', async (files, callback, showErrors) => {
+            showErrors = showErrors === undefined ? true : showErrors  // default show errors
+
+            files.map(x => x.path).filter(x => x.endsWith(".sol")).forEach(x => {
+                findUp(["truffle.js", "truffle-config.js"],{"cwd":path.dirname(x)}).then(tpath => {
+                    if(!isSubpath(vscode.workspace.rootPath, tpath)){
+                        showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + "The contract does not appear to be part of a truffle project.")
+                        return;
+                    }
+
+                    truffleFlattener([x], path.dirname(tpath)).then(res => cb(x, tpath, res)).then( () => {
+                        showErrors && vscode.window.showInformationMessage('[Flatten success] ' + x)
+                    }).catch(ex => {
+                        showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + ex.message + "\n\n" + "NOTE: Please make sure to run `npm install` in the truffle project dir.")
                         console.error(ex)
                     })
                 })
