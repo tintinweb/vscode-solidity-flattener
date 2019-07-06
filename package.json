@@ -1,8 +1,8 @@
 {
     "name": "vscode-solidity-flattener",
     "displayName": "Solidity Contract Flattener",
-    "description": "git in",
-    "version": "0.0.4",
+    "description": "Flatten Solidity Contracts using truffle-flattener",
+    "version": "0.0.5",
     "keywords": [
         "solidity",
         "ethereum",
