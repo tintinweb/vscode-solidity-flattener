@@ -7,6 +7,8 @@ Adds a context menu to flatten files to the vscode file explorer:
 * select files, `right-click` -> `Solidity: flatten selected file(s)` 
 * or `cmd + shift + p` -> `Solidity Flattener - flatten current file`.
 
+<img width="360" alt="context-menu" src="https://user-images.githubusercontent.com/2865694/60889644-c99fe880-a259-11e9-95d4-2899826b7d65.png">
+
 ### Developers
 
 `truffle-flattener.contextMenu.flatten` can be called by any other extension as following:
@@ -24,9 +26,6 @@ Adds a context menu to flatten files to the vscode file explorer:
         })
 ```
 
-
-
-Let me know if you need any other interfaces.
 
 ## Credits
 
