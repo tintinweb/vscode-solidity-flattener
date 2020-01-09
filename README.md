@@ -1,9 +1,15 @@
+[<img width="200" alt="get in touch with Consensys Diligence" src="https://user-images.githubusercontent.com/2865694/56826101-91dcf380-685b-11e9-937c-af49c2510aa0.png">](https://diligence.consensys.net)<br/>
+<sup>
+[[  🌐  ](https://diligence.consensys.net)  [  📩  ](mailto:diligence@consensys.net)  [  🔥  ](https://consensys.github.io/diligence/)]
+</sup><br/><br/>
+
 
 # VSCode Solidity Contract Flattener
 
 [truffle-flattener](https://www.npmjs.com/package/truffle-flattener) context menu integration for vscode.
 
-Adds a context menu to flatten files to the vscode file explorer: 
+Adds a context menu to flatten solidity contracts from truffle projects:
+* **NOTE/REQUIRED**: Make sure you've installed truffle and the project's dependencies (`npm install`).
 * select files, `right-click` -> `Solidity: flatten selected file(s)` 
 * or `cmd + shift + p` -> `Solidity Flattener - flatten current file`.
 
