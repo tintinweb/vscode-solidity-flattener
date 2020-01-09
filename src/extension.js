@@ -62,7 +62,7 @@ function onActivate(context) {
     context.subscriptions.push(
         vscode.commands.registerCommand(EXTENSION_PREFIX + '.contextMenu.flatten', async (clickedFile, selectedFiles) => {
 
-            selectedFiles.map(x => x.path).filter(x => x.endsWith(".sol")).forEach(x => {
+            selectedFiles.map(x => x.fsPath).filter(x => x.endsWith(".sol")).forEach(x => {
                 findUp(["truffle.js", "truffle-config.js"],{"cwd":path.dirname(x)}).then(tpath => {
                     if(!isSubpath(vscode.workspace.rootPath, tpath)){
                         vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + "The contract does not appear to be part of a truffle project.")
@@ -91,7 +91,7 @@ function onActivate(context) {
                 callback: args.callback || function(file, tpath, res){ newWindowBeside(res)}
             }
 
-            options.files.map(x => x.path).filter(x => x.endsWith(".sol")).forEach(x => {
+            options.files.map(x => x.fsPath).filter(x => x.endsWith(".sol")).forEach(x => {
                 findUp(["truffle.js", "truffle-config.js"],{"cwd":path.dirname(x)}).then(tpath => {
                     if(!isSubpath(vscode.workspace.rootPath, tpath)){
                         options.showErrors && vscode.window.showErrorMessage('[Flatten failed] ' + x + "\n" + "The contract does not appear to be part of a truffle project.")
