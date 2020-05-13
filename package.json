@@ -2,7 +2,7 @@
     "name": "vscode-solidity-flattener",
     "displayName": "Solidity Contract Flattener",
     "description": "Flatten Solidity Contracts using truffle-flattener",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "keywords": [
         "solidity",
         "ethereum",
@@ -28,7 +28,8 @@
     "main": "./src/extension.js",
     "activationEvents": [
         "onCommand:vscode-solidity-flattener.contextMenu.flatten",
-        "onCommand:vscode-solidity-flattener.activeFile.flatten"
+        "onCommand:vscode-solidity-flattener.activeFile.flatten",
+        "onCommand:vscode-solidity-flattener.flatten"
     ],
     "contributes": {
         "commands": [
