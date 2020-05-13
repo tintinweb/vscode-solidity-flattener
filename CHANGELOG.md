@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.8
+- Add multi workspace support
+- Fix linter warnings
+
 ## 0.0.7
 - Fix path to support Windows
 
