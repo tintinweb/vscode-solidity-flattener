@@ -47,7 +47,7 @@ function onActivate(context) {
 
             if (activeFile.endsWith(".sol")) {
                 findUp(["truffle.js", "truffle-config.js"], { "cwd": path.dirname(activeFile) }).then(tpath => {
-                    if (!workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
+                    if (!tpath || !workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
                         vscode.window.showErrorMessage(`[Flatten failed] ${activeFile}\nThe contract does not appear to be part of a truffle project.`);
                         return;
                     }
@@ -71,7 +71,7 @@ function onActivate(context) {
 
                     let workspacePath = vscode.workspace.getWorkspaceFolder(x);
 
-                    if (!workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
+                    if (!tpath || !workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
                         vscode.window.showErrorMessage(`[Flatten failed] ${x.fsPath}\nThe contract does not appear to be part of a truffle project.`);
                         return;
                     }
@@ -103,7 +103,7 @@ function onActivate(context) {
 
                     let workspacePath = vscode.workspace.getWorkspaceFolder(x);
 
-                    if (!workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
+                    if (!tpath || !workspacePath || !isSubpath(workspacePath.uri.fsPath, tpath)) {
                         options.showErrors && vscode.window.showErrorMessage(`[Flatten failed] ${x.fsPath}\nThe contract does not appear to be part of a truffle project.`);
                         return;
                     }
