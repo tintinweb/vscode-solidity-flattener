@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.10
+- updated: truffle flattener to 1.5.0
+
 ## 0.0.9
 - updated: truffle flattener
 
